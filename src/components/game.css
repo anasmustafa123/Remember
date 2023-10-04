@@ -1,0 +1,59 @@
+.flib-card {
+  background-color: transparent;
+  perspective: 1000px;
+  width: 836px;
+  height: 605px;
+}
+.inner-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: flipBack 2s forwards;
+}
+.flib-card:active .inner-card {
+  animation: flipCardAnimation 2s forwards;
+}
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the back of the card initially */
+}
+.front {
+  background-color: #f2f2f2;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+@keyframes flipCardAnimation {
+  0% {
+    transform: rotateY(0deg);
+  }
+  25% {
+    transform: rotateY(45deg);
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes flipBack {
+  0% {
+    transform: rotateY(180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
