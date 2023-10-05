@@ -6,7 +6,7 @@ export default function Prompt(props) {
   const { currentLevel, setCurrentLevel } = useContext(LevelContext);
   const { setShowPrompt } = useContext(PromptContext);
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-300">
+    <div className="w-screen h-screen flex justify-center items-center bg-gray-300 bg-opacity-75 fixed z-10">
       <div
         className={
           (props.result

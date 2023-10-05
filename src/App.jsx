@@ -7,6 +7,7 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/" element={<Level />} />
         <Route path="/level" element={<Level />} />
         <Route path="/game/:level" element={<Game />} />
         <Route path="/*" element="not found page" />
