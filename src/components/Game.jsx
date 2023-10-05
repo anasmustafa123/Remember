@@ -7,6 +7,7 @@ import { LevelContext, PromptContext } from "../contex/Context";
 import { updateMaxLevel } from "../storage/storage";
 import Prompt from "./Prompt";
 import "./game.css";
+import bg from "/bg.jpg"
 export default function Game() {
   /* const { level } = useParams(); */
   const [actorData, setActorData] = useState([]);
@@ -112,7 +113,11 @@ export default function Game() {
     };
     getData();
   }, [location.state.level]);
-
+  const style = {
+    backgroundImage: `url(${bg})`,
+    backgroundColor: "transparent",
+    backgroundSize: "cover"
+  }
   return (
     <>
       {showPrompt.state && (
@@ -122,7 +127,7 @@ export default function Game() {
           total={showPrompt.content.total}
         />
       )}
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div style={style} className="w-screen h-screen flex items-center justify-center">
         <div className="flib-card grid grid-cols-4 max-w-4xl gap-5">
           {getEightRandom().map((value) => (
             <div

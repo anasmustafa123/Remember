@@ -2,14 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { LevelContext } from "../contex/Context";
 import { useContext, useEffect } from "react";
 import { getMaxLevel } from "../storage/storage";
+import bgImg from "/levels-bg.jpg";
 export default function Level() {
   const navigate = useNavigate();
   const { maxLevel, setMaxLevel, setCurrentLevel } = useContext(LevelContext);
   useEffect(() => {
     setMaxLevel(getMaxLevel());
   }, []);
+  const bgStyle = {
+    backgroundImage: `url(${bgImg})`,
+    backgroundColor: "transparent",
+    backgroundSize: "cover"
+  }
   return (
-    <div className="w-screen  h-screen flex items-center justify-center">
+    <div style={bgStyle}  className="w-screen  h-screen flex items-center justify-center text-white ">
       <div className="grid grid-cols-4 grid-rows-3 max-w-4xl gap-5">
         {[...Array(12)].map((value, index) => (
           <div
@@ -25,7 +31,7 @@ export default function Level() {
               }
             }}
             className={
-              "flex flex-col items-center gap-3 border-black border-2 p-5  rounded-3xl " +
+              "flex flex-col items-center gap-3 border-black border-2 p-5  rounded-3xl border-white " +
               (index + 1 <= maxLevel ? "cursor-pointer" : "cursor-not-allowed")
             }
           >
