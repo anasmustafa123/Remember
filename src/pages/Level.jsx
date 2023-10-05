@@ -20,15 +20,8 @@ export default function Level() {
                 setCurrentLevel(index + 1);
                 navigate(`/game/${index + 1}`, { state: { level: index + 1 } });
               } else if (maxLevel == index + 1) {
-                alert("good luck");
                 setCurrentLevel(index + 1);
                 navigate(`/game/${index + 1}`, { state: { level: index + 1 } });
-              } else {
-                alert(
-                  `finish level ${maxLevel}  ${
-                    index > maxLevel ? "to " + index : ""
-                  } first`
-                );
               }
             }}
             className={

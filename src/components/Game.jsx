@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getActorsData } from "../mock-api/mock-api";
 import { useContext } from "react";
-import { LevelContext } from "../contex/Context";
+import { LevelContext, PromptContext } from "../contex/Context";
 import { updateMaxLevel } from "../storage/storage";
 import Prompt from "./Prompt";
 import "./game.css";
@@ -15,14 +15,15 @@ export default function Game() {
   const location = useLocation();
   const { currentLevel, setCurrentLevel, maxLevel, setMaxLevel } =
     useContext(LevelContext);
+  const {showPrompt, setShowPrompt} = useContext(PromptContext)
   const navigate = useNavigate();
-  const [showPrompt, setShowPrompt] = useState({ state: false, content: "" });
+  /* const [showPrompt, setShowPrompt] = useState({ state: false, content: "" }); */
 
   const getEightRandom = () => {
     const randomUnGuessedActor =
       unGuessedActors[parseInt(Math.random() * (unGuessedActors.length - 1))];
     let randomIndex = parseInt(Math.random() * 7);
-    console.log({ randomUnGuessedActor, randomIndex });
+/*     console.log({ randomUnGuessedActor, randomIndex }); */
     return actorData
       .map((value, index) => {
         let oldRandomIndex = actorData.findIndex((actor) => {
@@ -32,22 +33,22 @@ export default function Game() {
             return false;
           }
         });
-        console.log({
+       /*  console.log({
           index,
           randomIndex,
           oldRandomIndex,
           randomUnGuessedActor,
-        });
+        }); */
         if (index === randomIndex) {
           if (oldRandomIndex < 8) {
-            console.log("value1");
+/*             console.log("value1"); */
             return value;
           } else {
-            console.log("random");
+/*             console.log("random"); */
             return randomUnGuessedActor;
           }
         } else {
-          console.log("value2");
+/*           console.log("value2"); */
           return value;
         }
       })
@@ -57,6 +58,9 @@ export default function Game() {
     console.log({ GuessedActors, unGuessedActors, actorData });
     let isGuessed = GuessedActors.some((actor) => actor.id === currentActor.id);
     if (isGuessed) {
+      setGuessedActors([])
+      location.state.level = 0
+      location.state.level = currentLevel
       setShowPrompt({
         state: true,
         content: {
@@ -66,19 +70,19 @@ export default function Game() {
         },
       });
     } else {
-      console.log(GuessedActors.length + 1);
       if (GuessedActors.length + 1 === location.state.level * 8) {
-        alert(currentActor.name);
-        console.log(GuessedActors);
-        setGuessedActors([]);
-        alert("go to next level");
         if (currentLevel + 1 > maxLevel) {
           setMaxLevel(currentLevel + 1);
           updateMaxLevel(currentLevel + 1);
         }
-        setCurrentLevel(currentLevel + 1);
-        navigate(`/game/${parseInt(location.state.level) + 1}`, {
-          state: { level: parseInt(location.state.level) + 1 },
+        setGuessedActors([]);
+        setShowPrompt({
+          state: true,
+          content: {
+            result: true,
+            score: GuessedActors.length+1,
+            total: actorData.length,
+          },
         });
       } else {
         setGuessedActors([...GuessedActors, currentActor]);
@@ -102,6 +106,7 @@ export default function Game() {
         location.state.level * 8,
         Math.ceil((location.state.level * 8) / 16) || 1
       );
+      setCurrentLevel(location.state.level)
       setActorData(data);
       setUnGuessedActors(data);
     };

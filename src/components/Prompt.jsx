@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LevelContext } from "../contex/Context";
+import { LevelContext, PromptContext } from "../contex/Context";
 import { useContext } from "react";
 export default function Prompt(props) {
-  const { currentLevel } = useContext(LevelContext);
+  const { currentLevel, setCurrentLevel } = useContext(LevelContext);
+  const { setShowPrompt } = useContext(PromptContext);
   return (
-    <div className="w-screen h-screen flex justify-center items-center pointer-events-none">
+    <div className="w-screen h-screen flex justify-center items-center bg-gray-300">
       <div
         className={
           (props.result
@@ -25,12 +26,13 @@ export default function Prompt(props) {
         )}
         <h2 className="text-3xl text-center">{`${props.score} / ${props.total}`}</h2>
         <div className="flex gap-10 items-center justify-around text-4xl w-full">
-          {props.result && currentLevel <= 12 (
+          {props.result && currentLevel <= 12 && (
             <Link
-              to={{
-                pathname: `/game/${currentLevel + 1}`,
-                state: { level: currentLevel + 1 },
+            onClick={() => {
+                setShowPrompt({ state: false, content: "" });
               }}
+              to={`/game/${currentLevel+1}`}
+              state={{ level: currentLevel+1 }}
               className={
                 (props.result
                   ? "hover:text-green-400 hover:border-green-400 "
@@ -44,6 +46,10 @@ export default function Prompt(props) {
 
           <Link
             to={`/level`}
+            onClick={() => {
+              console.log("iam clicked");
+              setShowPrompt({ state: false, content: "" });
+            }}
             className={
               (props.result
                 ? "hover:text-green-400 hover:border-green-400 "
@@ -55,10 +61,11 @@ export default function Prompt(props) {
           </Link>
 
           <Link
-            to={{
-              pathname: `/game/${currentLevel}`,
-              state: { level: currentLevel },
+            onClick={() => {
+              setShowPrompt({ state: false, content: "" });
             }}
+            to={`/game/${currentLevel}`}
+            state={{ level: currentLevel }}
             className={
               (props.result
                 ? "hover:text-green-400 hover:border-green-400 "
