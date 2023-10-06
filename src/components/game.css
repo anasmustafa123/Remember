@@ -2,7 +2,7 @@
   background-color: transparent;
   perspective: 1000px;
   width: 836px;
-  height: 605px;
+  height: 601px;
 }
 .inner-card {
   position: relative;
@@ -33,6 +33,26 @@
   color: white;
   transform: rotateY(180deg);
 }
+
+@media screen and (max-width: 1024px) {
+  .flib-card {
+    width: 639px;
+    height: 453px;
+  }
+}
+@media screen and (max-width: 720px) {
+  .flib-card {
+    width: 423px;
+    height: 614px;
+  }
+}
+@media screen and (max-width: 440px) {
+  .flib-card {
+    width: 338px;
+    height: 457px;
+  }
+}
+
 
 @keyframes flipCardAnimation {
   0% {

@@ -15,8 +15,8 @@ export default function Level() {
     backgroundSize: "cover"
   }
   return (
-    <div style={bgStyle}  className="w-screen  h-screen flex items-center justify-center text-white ">
-      <div className="grid grid-cols-4 grid-rows-3 max-w-4xl gap-5">
+    <div style={bgStyle}  className="w-screen  min-h-screen overflow-scroll flex items-center justify-center text-white p-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3  max-w-4xl gap-5">
         {[...Array(12)].map((value, index) => (
           <div
             key={index}

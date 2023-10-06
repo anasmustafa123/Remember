@@ -127,8 +127,8 @@ export default function Game() {
           total={showPrompt.content.total}
         />
       )}
-      <div style={style} className="w-screen h-screen flex items-center justify-center">
-        <div className="flib-card grid grid-cols-4 max-w-4xl gap-5">
+      <div style={style} className="w-screen min-h-screen flex items-center justify-center pt-10 pb-10">
+        <div className="flib-card grid grid-cols-3 md:grid-cols-4 max-w-4xl gap-5">
           {getEightRandom().map((value) => (
             <div
               onClick={() => {
