@@ -12,7 +12,7 @@ export default function Prompt(props) {
           (props.result
             ? "border-green-400 bg-green-100 "
             : "border-red-400 bg-red-100 ") +
-          "flex flex-col items-center border-8 rounded-tr-2xl rounded-bl-2xl p-4 gap-7 w-[35rem]"
+          "w-80 md:w-[35rem] flex flex-col items-center border-8 rounded-tr-2xl rounded-bl-2xl p-4 gap-7 "
         }
       >
         {props.result ? (
