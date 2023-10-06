@@ -18,7 +18,6 @@ export default function Game() {
     useContext(LevelContext);
   const {showPrompt, setShowPrompt} = useContext(PromptContext)
   const navigate = useNavigate();
-  /* const [showPrompt, setShowPrompt] = useState({ state: false, content: "" }); */
 
   const getEightRandom = () => {
     const randomUnGuessedActor =
@@ -60,8 +59,7 @@ export default function Game() {
     let isGuessed = GuessedActors.some((actor) => actor.id === currentActor.id);
     if (isGuessed) {
       setGuessedActors([])
-      location.state.level = 0
-      location.state.level = currentLevel
+      setUnGuessedActors(actorData);
       setShowPrompt({
         state: true,
         content: {
